@@ -88,7 +88,7 @@ function algorithmSelection() {
         if(algorithm == "insertion") {
             ip1 = 1;
             setTimeout(()=> {
-                updateComputer("INSERTION SORT<br>================= <br><br>");
+                updateComputer("<b>INSERTION SORT</b><br>================= <br><br>");
             },500)
             insertionSort();
         }
@@ -139,7 +139,7 @@ function subSort() {
             updateComputer("No more Elements greater than "+ikey+"<br>");
             document.getElementById('stmt').innerHTML += "(Insert into space)";
             setTimeout(() => {
-                updateComputer("<b>Insert</b> "+ikey+" to the space<br>");
+                updateComputer("Insert "+ikey+" to the space<br>");
             }, 500);
             let e1 = document.getElementById(arr[ip2+1]);
             e1.style.transform = "scale(1.2)";
