@@ -1,6 +1,6 @@
-// var arr = [7,2,4,1,8,3];
-var arr = [];
-var algorithm = null;
+var arr = [10,20,9,2,21,12];
+arr.length = 0;
+var algorithm = null, delay = 1000;
 let computer = document.getElementById('computer');
 
 document.onload = function() {
@@ -15,7 +15,7 @@ function pushArray() {
         alert('No Value! Please enter a value');
     else {
         addElement(number);
-        arr.push(number);
+        arr.push(parseInt(number));
     }
 }
 
@@ -73,7 +73,7 @@ function sort(event) {
 }
 
 function algorithmSelection() {    
-    // Draw();
+    Draw();
     reset();
     
     // Select Algorithm
@@ -116,7 +116,7 @@ function insertionSort() {
         ip2 = ip1-1;
         setTimeout(function() {
             subSort();
-        }, 1500);
+        }, delay);
     }
     else 
         updateComputer("INSERTION SORT COMPLETE!");   
@@ -132,7 +132,7 @@ function subSort() {
             arr[ip2] = t;
             ip2--;
             subSort();
-        },1500);
+        },delay);
     }
     else {
         setTimeout(function() {
@@ -155,8 +155,8 @@ function subSort() {
             setTimeout(function() {
                 updateComputer("------------<br><br>");
                 insertionSort();
-            },1500);
-        }, 1500);
+            },delay);
+        }, delay);
     }
 }
 function iSwap(i, j) {
