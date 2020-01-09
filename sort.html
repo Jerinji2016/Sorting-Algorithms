@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="target">
+        <div id="d1">div1</div>
+        <div id="d2">div2</div>
+    </div>
+    <input type="button" value="click" onclick="myFun()">
+</body>
+</html>
+
+<script>
+
+    function myFun() {
+        
+    }
+
+    var arr = [4,2,3,1,5,7,8,6];
+    var ip1 = 1, ip2, ikey;
+    console.log("R-Insert\n==========");
+    
+    setTimeout(function() {
+        //insertionSort();
+    },1000);
+    
+    // function insert() {
+    //     console.log(a,"another"); 
+    //     while(i<a.length) {
+    //         let key = a[i];
+    //         let j = i-1;
+    //         while(j>=0 && a[j]>key) {
+    //             a[j+1] = a[j];
+    //             j--;
+    //         }
+    //         a[j+1] = key;
+    //         i++;
+    //     } 
+    //     console.log(a,"another2");
+    // }
+    
+    function insertionSort() {
+        console.log(arr, "array"); 
+        if(ip1 < arr.length) {
+            ikey = arr[ip1];
+            ip2 = ip1-1;
+            setTimeout(function() {
+                subSort();
+            }, 500);
+        }
+        else 
+            console.log("paripadi over");    
+    }
+
+    function subSort() {
+        if(ip2>=0 && arr[ip2]>ikey)
+        {
+            setTimeout(function() {
+                console.log("sub swap");
+                arr[ip2+1] = arr[ip2];
+                arr[ip2] = " ";
+                ip2--;
+                console.log(ikey, arr);
+                subSort();
+            },500);
+        }
+        else {
+            setTimeout(function() {
+                console.log("key ex");
+                arr[ip2+1] = ikey;
+                ip1++;
+                console.log(arr);
+                console.log(" =============== ")
+                setTimeout(function() {
+                    insertionSort();
+                },1000);
+            }, 500);
+        }
+    }
+</script>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        
+        <!-- CDN -->
+        <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="body-container">
+            <div class="header-container">
+                <h1>Sorting Algorithms</h1>
+            </div>
+            <div class="input-container">
+                <div>
+                    <label> Enter the Array Inputs: </label>
+                    <input type="number" id="inputs">
+                </div>
+                <div>
+                    <input type="button" value="Push" id="push" onclick="pushArray()">
+                    <input type="button" value="Pop" id="pop" onclick="popArray()">
+                </div>
+            </div>
+            <div class="compute-container">
+                <!-- Maximum 12 elements work best -->
+                <div class="array-container">
+                    <div class="top-things">
+                        <div class="array-heading">
+                            <h3>Arrays</h3>
+                        </div>
+                        <hr>
+                        <div class="sort-menu">
+                            <div id="insertion" onclick="sort(this)">Insertion</div>
+                            <div id="selection" onclick="sort(this)">Selection</div>
+                            <div id="quick" onclick="sort(this)">Quick</div>
+
+                            <input type="button" value="GO" class="go-sort" onclick="algorithmSelection()">
+                        </div>
+                    </div>
+                    
+                    <div class="array-box">
+                        <p id="empty-msg">Array Empty</p>
+                    </div>
+                    
+                    <div id="stmt"></div>
+                </div>
+                <code id="computer" style="font-family: monospace;"> </code>
+            </div>
+        </div>
+    </body>
+</html>
+<!-- //TODO
+    *   Set Delay speed by user
+    *   To repeat samesort add button 
+-->
