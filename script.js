@@ -1,5 +1,5 @@
 var arr = [10,20,9,2,21,12];
-arr.length = 0;
+// arr.length = 0;
 var algorithm = null, delay = 1000;
 let computer = document.getElementById('computer');
 
@@ -72,10 +72,7 @@ function sort(event) {
     }
 }
 
-function algorithmSelection() {    
-    Draw();
-    reset();
-    
+function algorithmSelection() {      
     // Select Algorithm
     if(arr.length == 0 )
         alert("Array Empty! Unable to Sort");
@@ -84,22 +81,38 @@ function algorithmSelection() {
     else if(algorithm == null)
         alert("Select an Algorithm!"); 
     else {
+        Draw();
+        reset();
         computer.style.display = "block";
         if(algorithm == "insertion") {
             ip1 = 1;
             setTimeout(()=> {
                 updateComputer("<b>INSERTION SORT</b><br>================= <br><br>");
-            },500)
+            },500);
             insertionSort();
         }
-        else if(algorithm == "selection") 
+        else if(algorithm == "selection") {
+            sp1 = 0;
+            var stmt = document.getElementById('stmt');
+            let newDiv = document.createElement("DIV");
+            newDiv.setAttribute("id", "skey");
+            stmt.appendChild(newDiv);
+            newDiv = null;
+            newDiv = document.createElement("DIV");
+            newDiv.setAttribute("id", "min-val");
+            stmt.appendChild(newDiv);
+            console.log(stmt);
+            setTimeout(function() {
+                updateComputer("<b>SELECTION SORT</b><br>================= <br><br>");
+            },500);
             selectionSort();
+        }
         else if(algorithm == "quick") 
             quickSort();
     }
 }
 
-// Function for Insertion Sort
+// Functions for Insertion Sort
 let ip1, i2p2, ikey;
 function insertionSort() {
     if(ip1 < arr.length) {
@@ -115,14 +128,14 @@ function insertionSort() {
         },500);
         ip2 = ip1-1;
         setTimeout(function() {
-            subSort();
+            isubSort();
         }, delay);
     }
     else 
         updateComputer("INSERTION SORT COMPLETE!");   
 }
 
-function subSort() {
+function isubSort() {
     if(ip2>=0 && arr[ip2]>ikey)
     {
         setTimeout(function() {
@@ -131,7 +144,7 @@ function subSort() {
             arr[ip2+1] = arr[ip2];
             arr[ip2] = t;
             ip2--;
-            subSort();
+            isubSort();
         },delay);
     }
     else {
@@ -139,7 +152,7 @@ function subSort() {
             updateComputer("No more Elements greater than "+ikey+"<br>");
             document.getElementById('stmt').innerHTML += "(Insert into space)";
             setTimeout(() => {
-                updateComputer("Insert "+ikey+" to the space<br>");
+                updateComputer("<br>Insert "+ikey+" to the space<br>");
             }, 500);
             let e1 = document.getElementById(arr[ip2+1]);
             e1.style.transform = "scale(1.2)";
@@ -153,13 +166,14 @@ function subSort() {
             arr[ip2+1] = ikey;
             ip1++;
             setTimeout(function() {
-                updateComputer("------------<br><br>");
+                updateComputer("-----Pass " + ip1 + "Complete-----<br><br>");
                 insertionSort();
             },delay);
         }, delay);
     }
 }
-function iSwap(i, j) {
+function iSwap(i, j) {       
+    //Swap HTML Elements (Insertion Sort)
     var ele1 = document.getElementById(arr[i]),
         ele2 = document.getElementById(arr[j]);
     let t = ele1.id, x=ele2.innerHTML;
@@ -178,12 +192,94 @@ function iSwap(i, j) {
     },600);
 }
 
-// Function for Selection Sort 
+// Functions for Selection Sort 
 function selectionSort() {
-    console.log("Selection Sort");
+        if(sp1 < arr.length-1) {
+        setTimeout(function() {
+            document.getElementById('skey').innerHTML = "Key = " + arr[sp1];
+            document.getElementById('min-val').innerHTML = "Min-Value = " + null;
+            updateComputer("Set " + arr[sp1] + " as Key<br>");
+            setTimeout(function() {
+                updateComputer("Check any other element less than "+ arr[sp1]+"<br>");
+                smin = sp1;
+                sp2=sp1+1;
+                setTimeout(function() {
+                    updateComputer("Set " + arr[smin] + " as Min-Value<br>");
+                    setTimeout(function() {
+                        ssubSort();
+                    }, delay);
+                }, 500);
+            }, 500);
+        },500);
+    }
+    else
+        updateComputer("SELECTION SORT COMPLETE!");
 }
 
-// Function for Quick Sort
+function ssubSort() {
+    if(sp2<arr.length) {
+        if(arr[sp2] < arr[smin]) {
+            setTimeout(function() {
+                updateComputer("=> " + arr[sp2] + " is less than " + arr[smin] + "<br>");
+                setTimeout(function() {
+                    updateComputer("&nbsp;&nbsp; Set " + arr[sp2] + " as Min-Value<br>");
+                },500);
+                smin = sp2;
+                document.getElementById('min-val').innerHTML = "Min-Value = " + arr[smin];
+                setTimeout(function() {
+                    sp2++;
+                    ssubSort();
+                }, delay);
+            },500);
+        }
+        else {
+            setTimeout(function() {
+                sp2++;
+                ssubSort();
+            }, delay);
+        }
+    }
+    else {
+        setTimeout(function() {
+            updateComputer("<br>Final Min-Value = " + arr[smin] + "<br>");
+            setTimeout(function() {
+                updateComputer("Swap Key & Min-Value <br>");
+                updateComputer("i.e., Swap("+ arr[sp1] +", " + arr[smin] + ")<br>");
+                sSwap(arr[sp1], arr[smin]);
+                let temp = arr[sp1];
+                arr[sp1] = arr[smin]; 
+                arr[smin] = temp;
+                sp1++;
+                setTimeout(function() {
+                    updateComputer("<br>----Pass " + sp1 + " Complete----<br><br>");
+                    setTimeout(function() {
+                        selectionSort();
+                    }, delay);
+                }, 500);
+            }, 200);
+        });
+    }
+}
+function sSwap(i, j) {
+    // Swap HTML Elements (Selection Sort)
+    let ele1 = document.getElementById(i),
+        ele2 = document.getElementById(j),
+        temp = ele1.innerHTML, t = ele1.id;
+    ele1.style.transform = ele2.style.transform = "scale(1.2)";
+    ele1.style.border = ele2.style.border = "3px solid green";
+
+    setTimeout(function() {
+        ele1.style.border = ele2.style.border = "2px solid blueviolet";
+        ele1.style.transform = ele2.style.transform = "scale(1)";
+        ele1.innerHTML = ele2.innerHTML;
+        ele2.innerHTML = temp;
+    }, 600);
+    ele1.id = "";
+    ele1.id = ele2.id;
+    ele2.id = t;
+}
+
+// Functions for Quick Sort
 function quickSort() {
     console.log("Quick Sort");
 }
@@ -199,4 +295,5 @@ function reset() {
     ip2 = undefined;
     key = undefined;
     computer.innerHTML = "";
+    document.getElementById('stmt').innerHTML = '';
 }

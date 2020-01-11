@@ -151,7 +151,6 @@ code:hover {
     color: white;
     transition: .5s;
 }
-
 #stmt {
     margin-top: 5px;
     display: flex;
@@ -159,5 +158,11 @@ code:hover {
     background-color: lightseagreen;
     height: 50px;
     font-size: 15px;
-    justify-content: center;
+    justify-content: space-around   ;
+}
+#stmt div {
+    animation: typewriter 1s initial;
+}
+@keyframes {
+
 }
