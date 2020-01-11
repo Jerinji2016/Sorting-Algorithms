@@ -107,8 +107,13 @@ function algorithmSelection() {
             },500);
             selectionSort();
         }
-        else if(algorithm == "quick") 
-            quickSort();
+        else if(algorithm == "bubble") {
+            bp1 = 0;
+            setTimeout(function() {
+                updateComputer("<b>BUBBLE SORT</b><br>================= <br><br>");
+            },500);
+            bubbleSort();
+        }
     }
 }
 
@@ -193,6 +198,7 @@ function iSwap(i, j) {
 }
 
 // Functions for Selection Sort 
+let sp1, sp2, smin;
 function selectionSort() {
         if(sp1 < arr.length-1) {
         setTimeout(function() {
@@ -279,9 +285,45 @@ function sSwap(i, j) {
     ele2.id = t;
 }
 
-// Functions for Quick Sort
-function quickSort() {
-    console.log("Quick Sort");
+// Functions for Bubble Sort
+let bp1, bp2;
+function bubbleSort() { 
+    if(bp1<(arr.length-1)) {
+        setTimeout(function() {
+            bp2 = 0;
+            bsubSort();
+        }, delay);
+    }
+    else {
+        console.log("SORT COMPLETE");
+    }
+}
+
+function bsubSort() {
+    if(bp2<(arr.length-bp1-1)) {
+        console.log(arr);
+        if(arr[bp2] > arr[bp2+1]) {
+            arr[bp2] += arr[bp2+1];
+            arr[bp2+1] = arr[bp2] - arr[bp2+1];
+            arr[bp2] -= arr[bp2+1];
+            setTimeout(function() {
+                bp2++;
+                bsubSort();
+            }, delay);
+        }
+        else {
+            setTimeout(function() {
+                bp2++;
+                bsubSort();
+            }, delay);
+        }
+    }
+    else {
+        setTimeout(function() {
+            bp1++;
+            bubbleSort();
+        }, delay);
+    }
 }
 
 // Scroll bar updater function

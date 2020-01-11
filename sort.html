@@ -13,44 +13,48 @@
 
 <script>
     var arr = [4,3,5,8,2,7,1,6];
-    var sp1=0, sp2, smin;
+    var bp1=0, bp2, delay = 500;
     
     setTimeout(function() {
-        selectionSort();
-    },500);
+        bubbleSort();
+    }, delay);
     
-    function selectionSort() {
-        console.log(arr);
-        if(sp1 < arr.length-1) {
-            console.log(sp1, "sp1");
-            smin = sp1;
-
-            sp2=sp1+1;
-
+    function bubbleSort() { 
+        if(bp1<(arr.length-1)) {
             setTimeout(function() {
-                ssubSort();
-            }, 500);
+                bp2 = 0;
+                bsubSort();
+            }, delay);
+        }
+        else {
+            console.log("SORT COMPLETE");
         }
     }
 
-    function ssubSort() {
-        if(sp2<arr.length) {
-            console.log(sp1,"sp1", sp2, "sp2");
-            if(arr[sp2] < arr[smin])
-                    smin = sp2;
-            sp2++;
-            setTimeout(function() {
-                ssubSort();
-            }, 500);
+    function bsubSort() {
+        if(bp2<(arr.length-bp1-1)) {
+            console.log(arr);
+            if(arr[bp2] > arr[bp2+1]) {
+                arr[bp2] += arr[bp2+1];
+                arr[bp2+1] = arr[bp2] - arr[bp2+1];
+                arr[bp2] -= arr[bp2+1];
+                setTimeout(function() {
+                    bp2++;
+                    bsubSort();
+                }, delay);
+            }
+            else {
+                setTimeout(function() {
+                    bp2++;
+                    bsubSort();
+                }, delay);
+            }
         }
         else {
-            let temp = arr[sp1];
-            arr[sp1] = arr[smin]; 
-            arr[smin] = temp;
-            sp1++;
             setTimeout(function() {
-                selectionSort();
-            }, 500);
+                bp1++;
+                bubbleSort();
+            }, delay);
         }
     }
 </script>
