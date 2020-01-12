@@ -35,21 +35,23 @@
                         <div class="array-heading">
                             <h3>Arrays</h3>
                         </div>
-                        <hr>
-                        <div class="sort-menu">
-                            <div id="insertion" onclick="sort(this)">Insertion</div>
-                            <div id="selection" onclick="sort(this)">Selection</div>
-                            <div id="bubble" onclick="sort(this)">Bubble</div>
-
-                            <input type="button" value="GO" class="go-sort" onclick="algorithmSelection()">
-                        </div>
                     </div>
-                    
+                    <hr>
+                    <div class="sort-menu">
+                        <button id="insertion" onclick="sort(this)">Insertion</button>
+                        <button id="selection" onclick="sort(this)">Selection</button>
+                        <button id="bubble" onclick="sort(this)">Bubble</button>
+
+                        <input type="button" value="GO" class="go-sort" onclick="algorithmSelection(); computer.style.display = 'block'; computer.style.animation = 'expand .3s';">
+                    </div>
                     <div class="array-box">
                         <p id="empty-msg">Array Empty</p>
                     </div>
                     
                     <div id="stmt"></div>
+                    <div style="display: flex; justify-content: center;">
+                        <input type="button" value="Clear" onclick="reset(); computer.style.display='none'">
+                    </div>
                 </div>
                 <code id="computer" style="font-family: monospace;"> </code>
             </div>

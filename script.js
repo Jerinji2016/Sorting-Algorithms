@@ -81,9 +81,8 @@ function algorithmSelection() {
     else if(algorithm == null)
         alert("Select an Algorithm!"); 
     else {
-        Draw();
         reset();
-        computer.style.display = "block";
+        Draw();
         if(algorithm == "insertion") {
             ip1 = 1;
             setTimeout(()=> {
@@ -101,7 +100,6 @@ function algorithmSelection() {
             newDiv = document.createElement("DIV");
             newDiv.setAttribute("id", "min-val");
             stmt.appendChild(newDiv);
-            console.log(stmt);
             setTimeout(function() {
                 updateComputer("<b>SELECTION SORT</b><br>================= <br><br>");
             },500);
@@ -109,6 +107,8 @@ function algorithmSelection() {
         }
         else if(algorithm == "bubble") {
             bp1 = 0;
+            document.getElementById('stmt').style.animation = "fadeOut 1s initial";
+            document.getElementById('stmt').style.display = "none";
             setTimeout(function() {
                 updateComputer("<b>BUBBLE SORT</b><br>================= <br><br>");
             },500);
@@ -189,7 +189,6 @@ function iSwap(i, j) {
     ele1.style.transform = ele2.style.transform = "scale(1.2)";
     ele1.style.border = ele2.style.border = "3px solid green";
     ele2.innerHTML = ele1.innerHTML;
-    ele1.innerHTML = "";
     
     setTimeout(function() {
         ele1.style.transform = ele2.style.transform = "scale(1)";
@@ -280,7 +279,6 @@ function sSwap(i, j) {
         ele1.innerHTML = ele2.innerHTML;
         ele2.innerHTML = temp;
     }, 600);
-    ele1.id = "";
     ele1.id = ele2.id;
     ele2.id = t;
 }
@@ -294,36 +292,66 @@ function bubbleSort() {
             bsubSort();
         }, delay);
     }
-    else {
-        console.log("SORT COMPLETE");
-    }
+    else 
+        updateComputer("BUBBLE SORT COMPLETE!");
 }
 
 function bsubSort() {
     if(bp2<(arr.length-bp1-1)) {
         console.log(arr);
-        if(arr[bp2] > arr[bp2+1]) {
-            arr[bp2] += arr[bp2+1];
-            arr[bp2+1] = arr[bp2] - arr[bp2+1];
-            arr[bp2] -= arr[bp2+1];
-            setTimeout(function() {
-                bp2++;
-                bsubSort();
-            }, delay);
-        }
-        else {
-            setTimeout(function() {
-                bp2++;
-                bsubSort();
-            }, delay);
-        }
+        setTimeout(function() {
+            updateComputer("Check " + arr[bp2] + " > " + arr[bp2+1] + "&emsp; --" + (arr[bp2] > arr[bp2+1]) + "<br>");
+            document.getElementById(arr[bp2]).style.border = "3px solid green";
+            document.getElementById(arr[(bp2+1)]).style.border = "3px solid green";
+            if(arr[bp2] > arr[bp2+1]) {
+                setTimeout(function() {
+                    updateComputer("Swap("+arr[bp2] + ", " + arr[bp2+1]+")<br><br>");
+                    bSwap(arr[bp2], arr[bp2+1]);
+                    arr[bp2] += arr[bp2+1];
+                    arr[bp2+1] = arr[bp2] - arr[bp2+1];
+                    arr[bp2] -= arr[bp2+1];
+                    setTimeout(function() {
+                        bp2++;
+                        bsubSort();
+                    }, delay);
+                }, 500);
+            }
+            else {
+                setTimeout(function() {
+                    document.getElementById(arr[bp2]).style.border = "2px solid blueviolet";
+                    document.getElementById(arr[bp2+1]).style.border = "2px solid blueviolet";
+                    bp2++;
+                    bsubSort();
+                }, delay);
+            }
+        }, 500);
     }
     else {
         setTimeout(function() {
+            updateComputer("-----PASS " + (bp1+1) + " COMPLETE-----<br><br>");
             bp1++;
             bubbleSort();
         }, delay);
     }
+}
+function bSwap(i, j) {
+    // Swap HTML Elements (Bubble Sort)
+    console.log("Swap HTML Elements");
+    let ele1 = document.getElementById(i),
+        ele2 = document.getElementById(j),
+        temp = ele1.innerHTML, t = ele1.id;
+    
+    ele1.style.transform = ele2.style.transform = "scale(1.2)";
+    console.log(ele1, ele2);
+    setTimeout(function() {
+        ele1.innerHTML = ele2.innerHTML;
+        ele2.innerHTML = temp;
+        ele1.style.border = ele2.style.border = "2px solid blueviolet";
+        ele1.style.transform = ele2.style.transform = "scale(1)";
+        ele1.id = ele2.id;
+        ele2.id = t;
+        console.log(ele1, ele2);
+    }, 600);
 }
 
 // Scroll bar updater function
@@ -337,5 +365,7 @@ function reset() {
     ip2 = undefined;
     key = undefined;
     computer.innerHTML = "";
+    document.getElementById('stmt').style.display = "flex";
     document.getElementById('stmt').innerHTML = '';
+    
 }
